@@ -96,7 +96,7 @@ impl Condition<'_> {
     }
 }
 
-impl<'a> Display for Condition<'a> {
+impl Display for Condition<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         if self.parents.is_empty()
             && self.peers.is_empty()
@@ -189,7 +189,7 @@ pub struct Command<'a> {
     pub prog: (&'a str, &'a str),
 }
 
-impl<'a> Display for Command<'a> {
+impl Display for Command<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.condition)?;
         writeln!(f, r#" -ka {} -d "{}""#, self.prog.0, self.prog.1)?;
@@ -204,8 +204,9 @@ pub struct Help<'a> {
     pub help: (char, &'a str, &'a str),
 }
 
-impl<'a> Display for Help<'a> {
+impl Display for Help<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // TODO: Verify why I'm not using this
         let condition = Condition {
             token_position: self.condition.token_position - 1,
             ..self.condition
@@ -226,7 +227,7 @@ pub struct File<'a> {
     pub condition: Condition<'a>,
 }
 
-impl<'a> Display for File<'a> {
+impl Display for File<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f, "{} -F", self.condition)
     }
@@ -249,7 +250,7 @@ pub struct Path<'a> {
     pub source: Option<&'a str>,
 }
 
-impl<'a> Display for Path<'a> {
+impl Display for Path<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
@@ -279,7 +280,7 @@ impl<'a> Display for Path<'a> {
     }
 }
 
-impl<'a> Display for Map<'a> {
+impl Display for Map<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let selectors = ["id" /* "pinned" */];
         for selector in selectors {
@@ -321,7 +322,7 @@ impl<'a> Display for Map<'a> {
     }
 }
 
-impl<'a> Display for Prog<'a> {
+impl Display for Prog<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let selectors = ["id", "tag", "name" /* "pinned" */];
         for selector in selectors {

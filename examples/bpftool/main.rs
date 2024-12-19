@@ -1,19 +1,6 @@
-use crate::codegen::Codegen;
-
-mod codegen;
 mod constants;
-mod tree;
 
-use tree::{Args, Command};
-
-macro_rules! sec {
-    ($section:expr) => {
-        concat!(sec!(), "# ", $section, "\n")
-    };
-    () => {
-        "\n\n"
-    };
-}
+use gen_complete::{sec, Args, Codegen, Command};
 
 fn main() {
     let mut res = String::new();
