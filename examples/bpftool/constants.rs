@@ -1,8 +1,5 @@
 #![allow(unused)]
 
-pub const FISH_FUNCTIONS: &str =
-    include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/src/functions.fish"));
-
 pub const PROGRAM_TYPES: [(&str, &str); 48] = [
     ("socket", "Attach to network sockets"),
     ("kprobe", "Instrument kernel function entry"),
